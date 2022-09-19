@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "App.QueryTester": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "MicroServiceTriggerServerPort": "6001",
+        "PublisherServerPort": "6000",
+        "MicroServiceListenServerIP": "127.0.0.1",
+        "PublisherServerIP": "127.0.0.1",
+        "MicroServiceListenServerPort": "6002",
+        "MicroServiceTriggerServerIP": "127.0.0.1"
+      }
+    }
+  }
+}
