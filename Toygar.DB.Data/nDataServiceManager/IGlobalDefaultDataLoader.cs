@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Toygar.DB.Data.nDataFileEntity;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices.nEntities;
+using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 
 namespace Toygar.DB.Data.nDataServiceManager
 {
     public interface IGlobalDefaultDataLoader : IDefaultDataLoader
     {
-        cDBConnectionSettingEntity GetConnectionSettingByHostName(string _HostName);
+
+        cProfileEntity GetProfileByHostName<TBaseEntity>(string _HostName) where TBaseEntity : cBaseEntity;
     }
 }

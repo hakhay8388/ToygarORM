@@ -3,6 +3,7 @@ using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 
 namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices.nEntities
 {
@@ -12,13 +13,7 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices
         public virtual string HostName { get; set; }
 
         [TDBField(_Nullable: false, _DataType: EDataType.Nvarchar, _Length: 255)]
-        public virtual cDBSettingEntity DBSetting { get; set; }
-
-        [TDBField(_Nullable: false, _DataType: EDataType.Datetime, _DefaultValue: "Now")]
-        public virtual DateTime EndDate { get; set; }
-
-
-
+        public virtual cEntityList<cDBSettingEntity> DBSetting { get; set; }
 
     }
 }

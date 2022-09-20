@@ -18,7 +18,7 @@ namespace Toygar.DB.Data
 
         public void Start(cApp _App)
         {
-            IDataService __DataService = DataServiceManager.GetDataService();
+            //IDataService __DataService = DataServiceManager.GetDataService();
         }
     }
 }

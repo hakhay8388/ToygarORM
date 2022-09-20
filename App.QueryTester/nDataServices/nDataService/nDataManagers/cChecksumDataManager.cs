@@ -10,19 +10,21 @@ using Toygar.DB.Data.nDataServiceManager;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nFilter;
 using App.QueryTester.nDataServices.nDataService;
 using App.QueryTester.nDataServices.nDataService.nEntityServices.nEntities;
+using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 
 namespace App.QueryTester.nDataServices.nDataService.nDataManagers
 {
-    public class cChecksumDataManager : cBaseDataManager
+    public class cChecksumDataManager<TBaseEntity> : cBaseDataManager<TBaseEntity>
+        where TBaseEntity : cBaseEntity
     {
         public cChecksumDataManager(IDataServiceManager _DataServiceManager)
           : base(_DataServiceManager)
         {
         }
 
-		public cDefaultDataChecksumEntity GetCheckSumByCode(string _CheckSumCode)
+		public cDefaultDataChecksumEntity GetCheckSumByCode(string _Host,  string _CheckSumCode)
 		{
-			IDataService __DataService = DataServiceManager.GetDataService();
+			IDataService __DataService = DataServiceManager.GetDataService<TBaseEntity>(_Host);
 
 			cDefaultDataChecksumEntity __DefaultDataChecksumEntity = __DataService.Database.Query<cDefaultDataChecksumEntity>()
 					.SelectAll()
@@ -35,11 +37,11 @@ namespace App.QueryTester.nDataServices.nDataService.nDataManagers
 		}
 
 
-		public cDefaultDataChecksumEntity AddCheckSum(string _Code, string _CheckSum)
+		public cDefaultDataChecksumEntity AddCheckSum(string _Host, string _Code, string _CheckSum)
 		{
-			IDataService __DataService = DataServiceManager.GetDataService();
+			IDataService __DataService = DataServiceManager.GetDataService<TBaseEntity>(_Host);
 
-			cDefaultDataChecksumEntity __DefaultDataChecksumEntity = __DataService.Database.CreateNew<cDefaultDataChecksumEntity>();
+            cDefaultDataChecksumEntity __DefaultDataChecksumEntity = __DataService.Database.CreateNew<cDefaultDataChecksumEntity>();
 			__DefaultDataChecksumEntity.Code = _Code;
 			__DefaultDataChecksumEntity.CheckSum = _CheckSum;
 			__DefaultDataChecksumEntity.Save();
@@ -53,14 +55,14 @@ namespace App.QueryTester.nDataServices.nDataService.nDataManagers
 			return _DefaultDataChecksumEntity;
 		}
 
-		public void CreateCheckSumIfNotExists(string _Code, string _CheckSum)
+		public void CreateCheckSumIfNotExists(string _Host, string _Code, string _CheckSum)
 		{
-			IDataService __DataService = DataServiceManager.GetDataService();
+			IDataService __DataService = DataServiceManager.GetDataService<TBaseEntity>(_Host);
 
-			cDefaultDataChecksumEntity __DefaultDataChecksumEntity = GetCheckSumByCode(_Code);
+            cDefaultDataChecksumEntity __DefaultDataChecksumEntity = GetCheckSumByCode(_Host, _Code);
 			if (__DefaultDataChecksumEntity == null)
 			{
-				AddCheckSum(_Code, _CheckSum);
+				AddCheckSum(_Host, _Code, _CheckSum);
 			}
 			else
 			{

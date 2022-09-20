@@ -12,42 +12,44 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using Toygar.DB.Data.nDataFileEntity;
 using SharpRaven.Data.Context;
 using System.Data;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices.nEntities;
+using Toygar.DB.Data.nDataService.nDatabase.nEntity;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers;
+using Toygar.DB.Data.nConfiguration.nDBItemConfig;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices;
 
 namespace Toygar.DB.Data.nDataServiceManager
 {
+    struct TDataServiceKey
+    {
+        public string HostName { get; set; }
+
+        public string EntityTypeName { get; set; }
+
+        public TDataServiceKey(string _HostName, string _EntityTypeName)
+        {
+            this.HostName = _HostName;
+            this.EntityTypeName = _EntityTypeName;
+        }
+    }
+
     [ToygarRegister(typeof(IDataServiceManager), true, true, true, false, LifeTime.ContainerControlledLifetimeManager)]
     public class cDataServiceManager : IDataServiceManager
     {
-        Dictionary<string, IDataService> DataServices { get; set; }
+        Dictionary<TDataServiceKey, IDataService> DataServices { get; set; }
         IGlobalDataService GlobalDataService { get; set; }
-        IGlobalDefaultDataLoader GlobalDefaultDataLoader { get; set; }
+        cProfileDataManager ProfileDataManager { get; set; }
 
         public cApp App { get; set; }
 
         public cDataServiceManager(cApp _App)
         {
             App = _App;
-            DataServices = new Dictionary<string, IDataService>();
+            DataServices = new Dictionary<TDataServiceKey, IDataService>();
         }
 
-        public string GetDataHost()
-        {
-            string __HostName = "";
-            if (App.Cfg<cDataConfiguration>().BootType == EBootType.Console
-              || App.Cfg<cDataConfiguration>().BootType == EBootType.Batch)
-            {
-                __HostName = App.Cfg<cDataConfiguration>().TargetHostName;
-            }
-            else
-            {
-                __HostName = App.Handlers.ContextHandler.CurrentContextItem.Context.Request.Host.Host;
-                __HostName = App.Handlers.StringHandler.GetRootDomain(__HostName);
-            }
-            return __HostName;
-        }
 
 		public List<IDataService> GetAllDataService()
 		{
@@ -62,92 +64,73 @@ namespace Toygar.DB.Data.nDataServiceManager
 			return __Result;
 		}
 
-
-		public IDataService GetDataService()
+        public IDataService GetDataService<TServiceBaseEntity>(string _HostName)
+            where TServiceBaseEntity : cBaseEntity
         {
-            //Burda konteksten IDataService Servis bulundu
-            string __HostName = GetDataHost();
+            string __EnttiyTypeName = typeof(TServiceBaseEntity).FullName;
 
-
-
-            if (DataServices.ContainsKey(__HostName))
+            lock (string.Intern(__EnttiyTypeName))
             {
-                return DataServices[__HostName];
-            }
-            else
-            {
-                lock (string.Intern(__HostName))
+
+                cDataConfiguration __Cfg = App.Cfg<cDataConfiguration>();
+
+                IGlobalDataService __GlobalDataService = GetGlobalDataService();
+
+                dynamic __ProfileEntity = ProfileDataManager.GetProfileWithDBSettingByEntityTypeAndHostName<TServiceBaseEntity>(_HostName);
+                if (__ProfileEntity != null)
                 {
-                    if (DataServices.ContainsKey(__HostName))
+                    TDataServiceKey __DataServiceKey = new TDataServiceKey(__ProfileEntity.HostName, __EnttiyTypeName);
+                    if (DataServices.ContainsKey(__DataServiceKey))
                     {
-                        return DataServices[__HostName];
+                        return DataServices[__DataServiceKey];
                     }
                     else
                     {
-                        lock (string.Intern(__HostName))
+                        lock (string.Intern(__DataServiceKey.HostName))
                         {
-                            if (DataServices.ContainsKey(__HostName))
+                            lock (string.Intern(__DataServiceKey.EntityTypeName))
                             {
-                                return DataServices[__HostName];
-                            }
-                            else
-                            {
-                                cDataConfiguration __Cfg = App.Cfg<cDataConfiguration>();
 
-                                IGlobalDataService __GlobalDataService = GetGlobalDataService();
 
-                                cDBConnectionSettingEntity __DBConnectionSettingEntity = GlobalDefaultDataLoader.GetConnectionSettingByHostName(__HostName);
-                                if (__DBConnectionSettingEntity != null)
+                                Type __Type = typeof(cDataService<>).MakeGenericType(App.Handlers.AssemblyHandler.FindFirstType(__DataServiceKey.EntityTypeName));
+
+                                IDataService __DataService = (IDataService)App.Factories.ObjectFactory.ResolveInstance(__Type);
+
+                                __DataService.LoadDB(__Cfg.DBVendor, __ProfileEntity.Server, __ProfileEntity.UserId, __ProfileEntity.Password, __ProfileEntity.DBName, Convert.ToInt32(__ProfileEntity.MaxConnectionCount));
+
+                                try
                                 {
-                                    Type __Type = typeof(cDataService<>).MakeGenericType(App.Handlers.AssemblyHandler.FindFirstType(__DBConnectionSettingEntity.EntityType));
-
-
-                                    IDataService __DataService = (IDataService)App.Factories.ObjectFactory.ResolveInstance(__Type);
-
-                                    //IDataService __DataService = App.Factories.ObjectFactory.ResolveInstance<IDataService>();
-                                    __DataService.LoadDB(__Cfg.DBVendor, __DBConnectionSettingEntity.Server, __DBConnectionSettingEntity.UserName, __DBConnectionSettingEntity.Password, __DBConnectionSettingEntity.GlobalDBName, __DBConnectionSettingEntity.MaxConnectCount);
-                                    try
-                                    {
-                                        DataServices.Add(__HostName, __DataService);
-                                    }
-                                    catch (Exception _Ex)
-                                    {
-                                        App.Loggers.CoreLogger.LogError(_Ex);
-                                        return DataServices[__HostName];
-                                    }
-
-                                    try
-                                    {
-                                        IComponentLoader __ComponentLoader = App.Factories.ObjectFactory.ResolveInstance<IComponentLoader>();
-                                        if (__ComponentLoader != null) __ComponentLoader.Load(DataServices[__HostName]);
-                                    }
-                                    catch (Exception _Ex)
-                                    {
-                                        App.Loggers.CoreLogger.LogError(_Ex);
-                                    }
-
-                                    if (__Cfg.LoadDefaultDataOnStart)
-                                    {
-                                        try
-                                        {
-                                            IDefaultDataLoader __DefaultDataLoader = App.Factories.ObjectFactory.ResolveInstance<IDefaultDataLoader>();
-                                            if (__DefaultDataLoader != null) __DefaultDataLoader.Load(DataServices[__HostName]);
-                                        }
-                                        catch (Exception _Ex)
-                                        {
-                                            App.Loggers.CoreLogger.LogError(_Ex);
-                                        }
-                                    }
-
-                                    return __DataService;
+                                    DataServices.Add(__DataServiceKey, __DataService);
                                 }
+                                catch (Exception _Ex)
+                                {
+                                    App.Loggers.CoreLogger.LogError(_Ex);
+                                    return DataServices[__DataServiceKey];
+                                }
+
+                                if (__Cfg.LoadDefaultDataOnStart)
+                                {
+                                    try
+                                    {
+                                        IDefaultDataLoader __DefaultDataLoader = App.Factories.ObjectFactory.ResolveInstance<IDefaultDataLoader>();
+                                        if (__DefaultDataLoader != null) __DefaultDataLoader.Load(DataServices[__DataServiceKey]);
+                                    }
+                                    catch (Exception _Ex)
+                                    {
+                                        App.Loggers.CoreLogger.LogError(_Ex);
+                                    }
+                                }
+
+                                return __DataService;
                             }
                         }
                     }
                 }
+                else
+                {
+                    throw new Exception("Profile Entity not exists!");
+                }
             }
-
-            return null;
         }
 
         public IGlobalDataService GetGlobalDataService()
@@ -155,8 +138,22 @@ namespace Toygar.DB.Data.nDataServiceManager
             if (GlobalDataService == null)
             {
                 GlobalDataService = App.Factories.ObjectFactory.ResolveInstance<IGlobalDataService>();
-                GlobalDefaultDataLoader = App.Factories.ObjectFactory.ResolveInstance<IGlobalDefaultDataLoader>();
-                GlobalDefaultDataLoader.Load(GlobalDataService);
+                ProfileDataManager = App.Factories.ObjectFactory.ResolveInstance<cProfileDataManager>();
+
+                cDataConfiguration __Cfg = App.Cfg<cDataConfiguration>();
+                foreach (cDBItemConfig __DBItemConfig in __Cfg.DBItemConfigs)
+                {
+                    cProfileEntity __ProfileEntity = null;
+                    GlobalDataService.Perform(() =>
+                    {
+                        __ProfileEntity = ProfileDataManager.GetProfileCreateIfNotExists(__DBItemConfig.HostName, __DBItemConfig.EntityType);
+                    });
+
+                    GlobalDataService.Perform(() =>
+                    {
+                        cDBSettingEntity __DBSettingEntity = ProfileDataManager.GetDBSettingCreateIfNotExists(__ProfileEntity, __DBItemConfig.EntityType, __DBItemConfig.UserId, __DBItemConfig.Password, __DBItemConfig.Server, __DBItemConfig.DBName, __DBItemConfig.MaxConnectCount);
+                    });
+                }
             }
 
             return GlobalDataService;

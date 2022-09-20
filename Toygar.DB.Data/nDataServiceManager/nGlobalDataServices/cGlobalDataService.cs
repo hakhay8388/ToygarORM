@@ -27,7 +27,7 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
             LoadDB(ServiceContext.Configuration.DBVendor, ServiceContext.Configuration.GlobalDBServer, ServiceContext.Configuration.GlobalDBUserName, ServiceContext.Configuration.GlobalDBPassword, ServiceContext.Configuration.GlobalDBName, ServiceContext.Configuration.MaxConnectCount);
         }
 
-        public string GetHostName()
+        /*public string GetHostName()
         {
             string __HostName = "";
             if (App.Cfg<cDataConfiguration>().BootType == EBootType.Console
@@ -41,15 +41,15 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
                 __HostName = App.Handlers.StringHandler.GetRootDomain(__HostName);
             }
             return __HostName;
-        }
+        }*/
 
-        public void LockPofile(Action _ServiceMethod)
+        public void LockPofile<TServiceBaseEntity>(string _HostName, Action _ServiceMethod)
+             where TServiceBaseEntity : cBaseEntity
         {
             cProfileDataManager __ProfileDataManager = App.Factories.ObjectFactory.ResolveInstance<cProfileDataManager>();
 
-            string __HostName = GetHostName();
 
-            cProfileEntity __Profile = __ProfileDataManager.GetProfileByHostName(__HostName);
+            cProfileEntity __Profile = __ProfileDataManager.GetProfileByEntityTypeAndHostName<TServiceBaseEntity>(_HostName);
 
             App.Loggers.SqlLogger.LogInfo("Profile Lock Begin (Locked Profile)");
 
@@ -62,9 +62,10 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
             App.Loggers.SqlLogger.LogInfo("Profile Lock End (Unlocked Profile)");
         }
 
-        public bool IsProfileLocked()
+        public bool IsProfileLocked<TServiceBaseEntity>(string _HostName)
+            where TServiceBaseEntity : cBaseEntity
         {
-            string __HostName = "";
+            /*string __HostName = "";
             if (App.Cfg<cDataConfiguration>().BootType == EBootType.Console
               || App.Cfg<cDataConfiguration>().BootType == EBootType.Batch)
             {
@@ -74,18 +75,19 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
             {
                 __HostName = App.Handlers.ContextHandler.CurrentContextItem.Context.Request.Host.Host;
                 __HostName = App.Handlers.StringHandler.GetRootDomain(__HostName);
-            }
+            }*/
 
             cProfileDataManager __ProfileDataManager = App.Factories.ObjectFactory.ResolveInstance<cProfileDataManager>();
-            cProfileEntity __Profile = __ProfileDataManager.GetProfileByHostName(__HostName);
+            cProfileEntity __Profile = __ProfileDataManager.GetProfileByEntityTypeAndHostName<TServiceBaseEntity>(_HostName);
             return __Profile.IsLocked();
         }
 
-        public void LockPofileByHostName(string _HostName, Action _ServiceMethod)
+        public void LockPofileByHostName<TServiceBaseEntity>(string _HostName, Action _ServiceMethod)
+            where TServiceBaseEntity : cBaseEntity
         {
             cProfileDataManager __ProfileDataManager = App.Factories.ObjectFactory.ResolveInstance<cProfileDataManager>();
 
-            cProfileEntity __Profile = __ProfileDataManager.GetProfileByHostName(_HostName);
+            cProfileEntity __Profile = __ProfileDataManager.GetProfileByEntityTypeAndHostName<TServiceBaseEntity>(_HostName);
 
             App.Loggers.SqlLogger.LogInfo("Profile Lock Begin (Locked Profile)");
 
@@ -98,10 +100,11 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
             App.Loggers.SqlLogger.LogInfo("Profile Lock End (Unlocked Profile)");
         }
 
-        public bool IsProfileLockedByHost(string _HostName)
+        public bool IsProfileLockedByHost<TServiceBaseEntity>(string _HostName)
+            where TServiceBaseEntity : cBaseEntity
         {
             cProfileDataManager __ProfileDataManager = App.Factories.ObjectFactory.ResolveInstance<cProfileDataManager>();
-            cProfileEntity __Profile = __ProfileDataManager.GetProfileByHostName(_HostName);
+            cProfileEntity __Profile = __ProfileDataManager.GetProfileByEntityTypeAndHostName<TServiceBaseEntity>(_HostName);
             return __Profile.IsLocked();
         }
 
@@ -133,6 +136,16 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
                 Database.DefaultConnection.Rollback();
                 throw;
             }
+        }
+
+        public void LockPofile(Action _ServiceMethod)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsProfileLocked<TServiceBaseEntity>(string _HostName, Action _ServiceMethod) where TServiceBaseEntity : cBaseEntity
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,6 +6,7 @@ using Toygar.Base.Boundary.nCore.nBootType;
 using Toygar.Base.Core.nApplication;
 using Toygar.DB.Data.nConfiguration;
 using Toygar.DB.Data.nDataServiceManager;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers;
 
 namespace Toygar.DB.Data
 {
@@ -35,5 +36,9 @@ namespace Toygar.DB.Data
             return App.Factories.ObjectFactory.ResolveInstance<IDataServiceManager>();
         }
 
+        public static cProfileDataManager GetProfileDataManager()
+        {
+            return App.Factories.ObjectFactory.ResolveInstance<cProfileDataManager>();
+        }
     }
 }

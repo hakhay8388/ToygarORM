@@ -6,10 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Toygar.Base.Core.nApplication;
+using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 
 namespace App.QueryTester.nDataServices.nDataService.nDataManagers
 {
-    public class cBaseDataManager : cCoreObject
+    public class cBaseDataManager<TBaseEntity> : cCoreObject
+        where TBaseEntity : cBaseEntity
     {
         public IDataServiceManager DataServiceManager { get; set; }
         public cBaseDataManager(IDataServiceManager _DataServiceManager)
