@@ -48,7 +48,6 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
         {
             cProfileDataManager __ProfileDataManager = App.Factories.ObjectFactory.ResolveInstance<cProfileDataManager>();
 
-
             cProfileEntity __Profile = __ProfileDataManager.GetProfileByEntityTypeAndHostName<TServiceBaseEntity>(_HostName);
 
             App.Loggers.SqlLogger.LogInfo("Profile Lock Begin (Locked Profile)");
@@ -138,14 +137,5 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
             }
         }
 
-        public void LockPofile(Action _ServiceMethod)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsProfileLocked<TServiceBaseEntity>(string _HostName, Action _ServiceMethod) where TServiceBaseEntity : cBaseEntity
-        {
-            throw new NotImplementedException();
-        }
     }
 }
