@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 
-namespace App.QueryTester.nDataServices.nDataService.nEntityServices.nEntities
+namespace App.QueryTester.nDataServices.nDataService.nOtherEntityServices.nEntities
 {
-    public class cBaseQueryTesterEntity : cBaseEntity
+    public class cBaseOtherTestEntity : cBaseEntity
     {
     }
 }

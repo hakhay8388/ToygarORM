@@ -1,18 +1,21 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Toygar.Base.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 
 namespace App.QueryTester.nDataServices.nDataService.nEntityServices.nEntities
 {
-    public class cDefaultDataChecksumEntity : cBaseQueryTesterEntity
+    public class cTestUserEntity : cBaseTestEntity
     {
         [TDBField(_Nullable: false, _DataType: EDataType.Nvarchar, _Length: 255)]
-        public virtual string Code { get; set; }
+        public virtual string Name { get; set; }
 
-		[TDBField(_Nullable: false, _DataType: EDataType.Nvarchar, _Length: 2048)]
-		public virtual string CheckSum { get; set; }
-
-	}
+        [TDBField(_Nullable: false, _DataType: EDataType.Nvarchar, _Length: 255)]
+        public virtual string Surname { get; set; }
+      
+    }
 }

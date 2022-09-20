@@ -10,6 +10,7 @@ using Toygar.DB.Data.nDataServiceManager;
 using Toygar.Base.Boundary.nData;
 using App.QueryTester.nDataServices.nDataService.nDataManagers;
 using App.QueryTester.nDataServices.nDataService.nEntityServices.nEntities;
+using App.QueryTester.nDataServices.nDataService.nOtherEntityServices.nEntities;
 
 namespace App.QueryTester
 {
@@ -28,31 +29,44 @@ namespace App.QueryTester
             __DataConfiguration.GlobalDBServer = "127.0.0.1";
             __DataConfiguration.GlobalDBName = "GlobalQueryTesterDB2";
             __DataConfiguration.DBVendor = EDBVendor.MSSQL;
-            __DataConfiguration.DBVersion = 1;
+            __DataConfiguration.DBVersion = 4;
 
-            __DataConfiguration.Add<cBaseQueryTesterEntity>("localhost", "sa", "123456", "127.0.0.1", "TestDB2", 100, EDBVendor.MSSQL);
-
+            __DataConfiguration.Add<cBaseTestEntity>("localhost", "sa", "123456", "127.0.0.1", "TestDB2", 100, EDBVendor.MSSQL);
+            __DataConfiguration.Add<cBaseOtherTestEntity>("otherdomain", "sa", "123456", "127.0.0.1", "TestDB3", 100, EDBVendor.MSSQL);
 
             ToygarApp.Init(__DataConfiguration);
 
-            IDataServiceManager __DataServiceManager = ToygarApp.GetDataServiceManager();
-            IDataService __DataService = __DataServiceManager.GetDataService<cBaseQueryTesterEntity>("localhost");
+            TestDomian1();
+            TestDomian2();
+        }
 
-            cChecksumDataManager<cBaseQueryTesterEntity> __cChecksumDataManager = new cChecksumDataManager<cBaseQueryTesterEntity>(__DataServiceManager);
+        static void TestDomian1()
+        {
+            IDataServiceManager __DataServiceManager = ToygarApp.GetDataServiceManager();
+            IDataService __DataService = __DataServiceManager.GetDataService<cBaseTestEntity>("localhost");
+
+            cDefaultParamDataManager<cBaseTestEntity> __ParamDataManager = new cDefaultParamDataManager<cBaseTestEntity>(__DataServiceManager);
 
             __DataService.Perform(() =>
             {
-                __cChecksumDataManager.AddCheckSum("localhost", "asdad", "asdasdasdas");
+                __ParamDataManager.AddParam(__DataService, "Param1", "TestValue");
             });
-
-
-            
-
-            //__DataConfiguration.RequestPerformanceLogPath
-
-            //IDataService __DataService = DataServiceManager.GetDataService();
-
-
         }
+
+        static void TestDomian2()
+        {
+
+            IDataServiceManager __DataServiceManager = ToygarApp.GetDataServiceManager();
+            IDataService __DataService = __DataServiceManager.GetDataService<cBaseOtherTestEntity>("otherdomain");
+
+            __DataService.Perform(() =>
+            {
+                cTestFriendEntity __TestFriendEntity = __DataService.Database.CreateNew<cTestFriendEntity>();
+                __TestFriendEntity.Name = "Hayri";
+                __TestFriendEntity.Surname = "Eryürek";
+                __TestFriendEntity.Save();
+            });
+        }
+
     }
 }
