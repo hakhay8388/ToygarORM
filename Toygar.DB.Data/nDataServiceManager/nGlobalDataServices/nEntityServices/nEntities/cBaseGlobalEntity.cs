@@ -1,5 +1,4 @@
-﻿using Toygar.Base.Boundary.nData;
-using Toygar.DB.Data.nDataService.nDatabase.nEntity;
+﻿using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using System;
 using System.Collections.Generic;

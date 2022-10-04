@@ -1,12 +1,10 @@
-﻿using Toygar.Base.Boundary.nCore.nBootType;
-using Toygar.Base.Boundary.nCore.nObjectLifeTime;
-using Toygar.Base.Boundary.nData;
-using Toygar.Base.Core.nAttributes;
+﻿using Bootstrapper.Boundary.nCore.nBootType;
+using Bootstrapper.Boundary.nCore.nObjectLifeTime;
+using Bootstrapper.Core.nAttributes;
 using Toygar.DB.Data.nConfiguration;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
-using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers;
 using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices.nEntities;
 using System;
 using System.Collections.Generic;
@@ -15,10 +13,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManager;
 
 namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices
 {
-    [ToygarRegister(typeof(IGlobalDataService), false, false, false, false, LifeTime.PerResolveLifetimeManager)]
+    [Register(typeof(IGlobalDataService), false, false, false, false, LifeTime.PerResolveLifetimeManager)]
     public class cGlobalDataService : cBaseDataService<cGlobalDataServiceContext, cBaseGlobalEntity>, IGlobalDataService
     {
         public cGlobalDataService(cGlobalDataServiceContext _CoreServiceContext)

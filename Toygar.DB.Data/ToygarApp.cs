@@ -1,12 +1,11 @@
-﻿using SharpRaven.Data.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Toygar.Base.Boundary.nCore.nBootType;
-using Toygar.Base.Core.nApplication;
+using Bootstrapper.Boundary.nCore.nBootType;
+using Bootstrapper.Core.nApplication;
 using Toygar.DB.Data.nConfiguration;
 using Toygar.DB.Data.nDataServiceManager;
-using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManager;
 
 namespace Toygar.DB.Data
 {

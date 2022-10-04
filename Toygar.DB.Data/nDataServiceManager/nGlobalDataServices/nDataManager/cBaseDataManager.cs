@@ -1,11 +1,10 @@
-﻿using Toygar.Base.Core.nCore;
+﻿using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService;
-using Toygar.DB.Data.nDataServiceManager;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers
+namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManager
 {
     public class cBaseDataManager : cCoreService<cGlobalDataServiceContext>
     {

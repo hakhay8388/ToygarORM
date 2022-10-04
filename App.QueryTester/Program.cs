@@ -1,5 +1,5 @@
-﻿using Toygar.Base.Boundary.nCore.nBootType;
-using Toygar.Base.Core.nApplication;
+﻿using Bootstrapper.Boundary.nCore.nBootType;
+using Bootstrapper.Core.nApplication;
 using System;
 using System.IO;
 using System.Text;
@@ -7,7 +7,7 @@ using Toygar.DB.Data;
 using Toygar.DB.Data.nConfiguration;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataServiceManager;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using App.QueryTester.nDataServices.nDataService.nDataManagers;
 using App.QueryTester.nDataServices.nDataService.nEntityServices.nEntities;
 using App.QueryTester.nDataServices.nDataService.nOtherEntityServices.nEntities;

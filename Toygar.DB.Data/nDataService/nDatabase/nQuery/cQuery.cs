@@ -1,5 +1,5 @@
-using Toygar.Base.Core.nApplication;
-using Toygar.Base.Core.nCore;
+using Bootstrapper.Core.nApplication;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable;
@@ -37,7 +37,7 @@ using System.Text.RegularExpressions;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nResult;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nCase;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nCaseWhenElement;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using Toygar.DB.Data.nDataUtils;
 

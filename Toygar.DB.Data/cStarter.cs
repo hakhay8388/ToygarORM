@@ -1,6 +1,6 @@
-﻿using Toygar.Base.Core.nApplication;
-using Toygar.Base.Core.nApplication.nStarter;
-using Toygar.Base.Core.nCore;
+﻿using Bootstrapper.Core.nApplication;
+using Bootstrapper.Core.nApplication.nStarter;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataServiceManager;
 

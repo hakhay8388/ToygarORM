@@ -1,6 +1,6 @@
-﻿using Toygar.Base.Boundary.nCore.nObjectLifeTime;
-using Toygar.Base.Core.nAttributes;
-using Toygar.Base.Core.nApplication;
+﻿using Bootstrapper.Boundary.nCore.nObjectLifeTime;
+using Bootstrapper.Core.nAttributes;
+using Bootstrapper.Core.nApplication;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 using System.Collections.Generic;
 using System;

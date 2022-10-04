@@ -1,11 +1,11 @@
 ﻿using App.QueryTester.nDataServices.nDataService;
-using Toygar.Base.Core.nCore;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataServiceManager;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Toygar.Base.Core.nApplication;
+using Bootstrapper.Core.nApplication;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 
 namespace App.QueryTester.nDataServices.nDataService.nDataManagers

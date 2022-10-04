@@ -1,5 +1,5 @@
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using System;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nDataService.nDatabase.nIDController
 {

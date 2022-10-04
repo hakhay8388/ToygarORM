@@ -1,5 +1,5 @@
-using Toygar.Base.Core.nApplication;
-using Toygar.Base.Core.nCore;
+using Bootstrapper.Core.nApplication;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable;
@@ -19,8 +19,8 @@ using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nGeneralElemen
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nFilter.nFilterElements;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nFilter.nFilterElements.nOperators;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nColumnQueryElements;
-using Toygar.Base.Boundary.nData;
 using Toygar.DB.Data.nDataUtils;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nDataService.nDatabase.nQuery
 {

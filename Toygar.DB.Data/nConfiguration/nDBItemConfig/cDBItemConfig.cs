@@ -1,4 +1,5 @@
-using Toygar.Base.Boundary.nData;
+
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nConfiguration.nDBItemConfig
 {

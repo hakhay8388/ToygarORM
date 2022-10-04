@@ -1,6 +1,6 @@
-using Toygar.Base.Core.nCore;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using System;
 using System.Collections.Generic;

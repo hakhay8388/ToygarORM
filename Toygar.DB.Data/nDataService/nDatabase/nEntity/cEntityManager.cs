@@ -1,4 +1,4 @@
-using Toygar.Base.Core.nCore;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService.nDatabase;
 using Toygar.DB.Data.nDataService.nDatabase.nSql;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable;
@@ -16,7 +16,7 @@ using Toygar.DB.Data.nDataService.nDatabase.nCatalog.nRowOperationCatalog;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nGenerators;
 using Toygar.DB.Data.nDataService.nDatabase.nDBInfo; 
 using Toygar.DB.Data.nConfiguration; 
-using Toygar.Base.Core.nApplication;
+using Bootstrapper.Core.nApplication;
 using System.Dynamic;
 
 namespace Toygar.DB.Data.nDataService.nDatabase.nEntity

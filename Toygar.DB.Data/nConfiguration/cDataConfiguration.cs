@@ -1,12 +1,12 @@
-using Toygar.Base.Boundary.nCore.nBootType;
-using Toygar.Base.Boundary.nData;
-using Toygar.Base.Core.nApplication;
-using Toygar.Base.Core.nApplication.nConfiguration;
+using Bootstrapper.Boundary.nCore.nBootType;
+using Bootstrapper.Core.nApplication;
+using Bootstrapper.Core.nApplication.nConfiguration;
 using Toygar.DB.Data.nDataService.nDatabase.nSql;
 using System.Collections.Generic;
 using System.IO;
 using Toygar.DB.Data.nConfiguration.nDBItemConfig;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nConfiguration
 {

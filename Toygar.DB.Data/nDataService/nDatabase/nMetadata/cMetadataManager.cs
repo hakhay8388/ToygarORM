@@ -1,5 +1,5 @@
-﻿using Toygar.Base.Core.nAttributes;
-using Toygar.Base.Core.nCore;
+﻿using Bootstrapper.Core.nAttributes;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService.nDatabase.nMetadata.nTable;
 using Toygar.DB.Data.nDataService;
 using System;

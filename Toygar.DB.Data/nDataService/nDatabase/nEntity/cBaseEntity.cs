@@ -1,7 +1,6 @@
-using Toygar.Base.Core.nApplication;
-using Toygar.Base.Core.nApplication.nFactories.nHookedObjectFactory.nPropertyHookedObjectFactory;
+using Bootstrapper.Core.nApplication;
+using Bootstrapper.Core.nApplication.nFactories.nHookedObjectFactory.nPropertyHookedObjectFactory;
 using Toygar.DB.Data.nDataService.nDatabase.nSql;
-using Toygar.Base.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable;
@@ -17,6 +16,7 @@ using Toygar.DB.Data.nDataService.nDatabase.nDBInfo;
 using Toygar.DB.Data.nConfiguration;
 using System.Dynamic;
 using System.ComponentModel;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nDataService.nDatabase.nEntity
 {

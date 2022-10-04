@@ -11,7 +11,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nDataService.nDatabase.nMetadata.nTable
 {

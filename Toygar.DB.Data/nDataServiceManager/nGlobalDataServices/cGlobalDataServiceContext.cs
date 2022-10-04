@@ -1,5 +1,5 @@
-﻿using Toygar.Base.Core.nApplication;
-using Toygar.Base.Core.nCore;
+﻿using Bootstrapper.Core.nApplication;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nConfiguration;
 using System;
 using System.Collections.Generic;

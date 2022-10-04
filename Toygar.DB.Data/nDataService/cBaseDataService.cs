@@ -1,5 +1,5 @@
-using Toygar.Base.Core.nAttributes;
-using Toygar.Base.Core.nCore;
+using Bootstrapper.Core.nAttributes;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nConfiguration;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase.nDifference;
@@ -10,9 +10,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase;
-using Toygar.Base.Boundary.nCore.nBootType;
+using Bootstrapper.Boundary.nCore.nBootType;
 using System.Reflection;
 
 namespace Toygar.DB.Data.nDataService

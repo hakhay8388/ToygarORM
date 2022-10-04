@@ -1,4 +1,4 @@
-﻿using Toygar.Base.Core.nCore;
+﻿using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery;
 using System;

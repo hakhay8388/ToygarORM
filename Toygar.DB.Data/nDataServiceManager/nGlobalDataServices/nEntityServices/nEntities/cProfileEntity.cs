@@ -1,9 +1,9 @@
-﻿using Toygar.Base.Boundary.nData;
-using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
+﻿using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices.nEntities
 {

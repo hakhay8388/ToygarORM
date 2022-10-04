@@ -1,11 +1,11 @@
-using Toygar.Base.Core.nApplication;
+using Bootstrapper.Core.nApplication;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes
 {

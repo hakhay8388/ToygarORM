@@ -1,4 +1,4 @@
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nGenerators;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nFilter.nFilterElements.nOperators;

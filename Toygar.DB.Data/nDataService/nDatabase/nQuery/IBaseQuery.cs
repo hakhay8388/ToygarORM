@@ -1,5 +1,4 @@
-﻿using Toygar.Base.Boundary.nData;
-using Toygar.DB.Data.nDataService.nDatabase.nEntity;
+﻿using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery.nQueryElements.nFilter.nFilterElements;
@@ -11,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Toygar.Boundary.nData;
 
 namespace Toygar.DB.Data.nDataService.nDatabase.nQuery
 {

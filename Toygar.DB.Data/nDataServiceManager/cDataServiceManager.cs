@@ -1,8 +1,8 @@
-﻿using Toygar.Base.Boundary.nCore.nBootType;
-using Toygar.Base.Boundary.nCore.nObjectLifeTime;
-using Toygar.Base.Core.nApplication;
-using Toygar.Base.Core.nAttributes;
-using Toygar.Base.Core.nCore;
+﻿using Bootstrapper.Boundary.nCore.nBootType;
+using Bootstrapper.Boundary.nCore.nObjectLifeTime;
+using Bootstrapper.Core.nApplication;
+using Bootstrapper.Core.nAttributes;
+using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nConfiguration;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase;
@@ -12,13 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using SharpRaven.Data.Context;
-using System.Data;
 using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices.nEntities;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
-using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers;
 using Toygar.DB.Data.nConfiguration.nDBItemConfig;
 using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices;
+using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManager;
 
 namespace Toygar.DB.Data.nDataServiceManager
 {
@@ -35,7 +33,7 @@ namespace Toygar.DB.Data.nDataServiceManager
         }
     }
 
-    [ToygarRegister(typeof(IDataServiceManager), true, true, true, false, LifeTime.ContainerControlledLifetimeManager)]
+    [Register(typeof(IDataServiceManager), true, true, true, false, LifeTime.ContainerControlledLifetimeManager)]
     public class cDataServiceManager : IDataServiceManager
     {
         Dictionary<TDataServiceKey, IDataService> DataServices { get; set; }

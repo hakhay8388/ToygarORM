@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Toygar.Base.Core\Toygar.Base.Core.csproj" />
+    <ProjectReference Include="..\..\Bootstrapper\Bootstrapper.Core\Bootstrapper.Core.csproj" />
+    <ProjectReference Include="..\Toygar.Boundary\Toygar.Boundary.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 
 namespace App.QueryTester.nDataServices.nDataService.nEntityServices.nEntities

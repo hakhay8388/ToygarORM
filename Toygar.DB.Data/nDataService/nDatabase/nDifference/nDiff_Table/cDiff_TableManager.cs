@@ -1,6 +1,6 @@
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
 using Toygar.DB.Data.nDataService.nDatabase.nMetadata.nTable;
-using Toygar.Base.Boundary.nData;
+using Toygar.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nEntityTable.nEntityColumn;

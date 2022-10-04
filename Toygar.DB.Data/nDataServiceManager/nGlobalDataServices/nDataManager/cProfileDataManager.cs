@@ -1,4 +1,4 @@
-﻿using Toygar.Base.Core.nCore;
+﻿using Bootstrapper.Core.nCore;
 using Toygar.DB.Data.nDataService;
 using Toygar.DB.Data.nDataService.nDatabase.nQuery;
 using System;
@@ -6,14 +6,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Toygar.DB.Data.nDataService.nDatabase.nSql;
-using Toygar.DB.Data.nDataServiceManager;
 using Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nEntityServices.nEntities;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity;
-using Toygar.Base.Boundary.nData;
 using Toygar.DB.Data.nDataService.nDatabase.nEntity.nAttributes;
 using System.Collections;
 
-namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers
+namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManager
 {
     public class cProfileDataManager : cBaseDataManager
     {
@@ -49,7 +47,7 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers
 
             cProfileEntity __ProfileEntityAlias = null;
 
-            cProfileEntity __Result = __DataService.Database.Query<cProfileEntity>(() => __ProfileEntityAlias)
+            cProfileEntity __Result = __DataService.Database.Query(() => __ProfileEntityAlias)
                 .SelectAll()
                 .Where()
                 .Operand(__Item => __Item.HostName).Eq(_HostName)
@@ -83,14 +81,14 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers
             cProfileEntity __ProfileEntityAlias = null;
             cDBSettingEntity __DBSettingEntityAlias = null;
 
-            cQuery<cProfileEntity> __Query = __DataService.Database.Query<cProfileEntity>(() => __ProfileEntityAlias)
-                .SelectAliasAllColumns<cProfileEntity>(() => __ProfileEntityAlias)
-                .SelectAliasColumn<cDBSettingEntity>(() => __DBSettingEntityAlias, __Item => __Item.Server)
-                .SelectAliasColumn<cDBSettingEntity>(() => __DBSettingEntityAlias, __Item => __Item.UserId)
-                .SelectAliasColumn<cDBSettingEntity>(() => __DBSettingEntityAlias, __Item => __Item.Password)
-                .SelectAliasColumn<cDBSettingEntity>(() => __DBSettingEntityAlias, __Item => __Item.DBName)
-                .SelectAliasColumn<cDBSettingEntity>(() => __DBSettingEntityAlias, __Item => __Item.MaxConnectionCount)
-                .SelectAliasColumn<cDBSettingEntity>(() => __DBSettingEntityAlias, __Item => __Item.EntityType)
+            cQuery<cProfileEntity> __Query = __DataService.Database.Query(() => __ProfileEntityAlias)
+                .SelectAliasAllColumns(() => __ProfileEntityAlias)
+                .SelectAliasColumn(() => __DBSettingEntityAlias, __Item => __Item.Server)
+                .SelectAliasColumn(() => __DBSettingEntityAlias, __Item => __Item.UserId)
+                .SelectAliasColumn(() => __DBSettingEntityAlias, __Item => __Item.Password)
+                .SelectAliasColumn(() => __DBSettingEntityAlias, __Item => __Item.DBName)
+                .SelectAliasColumn(() => __DBSettingEntityAlias, __Item => __Item.MaxConnectionCount)
+                .SelectAliasColumn(() => __DBSettingEntityAlias, __Item => __Item.EntityType)
 
                 .Inner<cDBSettingEntity>().Join(() => __DBSettingEntityAlias)
                         .On()
@@ -126,7 +124,7 @@ namespace Toygar.DB.Data.nDataServiceManager.nGlobalDataServices.nDataManagers
 
             cDBSettingEntity __DBSettingEntityAlias = null;
 
-            cDBSettingEntity __Result = __DataService.Database.Query<cDBSettingEntity>(() => __DBSettingEntityAlias)
+            cDBSettingEntity __Result = __DataService.Database.Query(() => __DBSettingEntityAlias)
                 .SelectAll()
                 .Where()
                 .Operand(__Item => __Item.EntityType).Eq(_FullEntityTypeName)
