@@ -30,6 +30,7 @@ namespace Toygar.DB.Data.nConfiguration
         {
             DBItemConfigs = new List<cDBItemConfig>();
             InitDefault();
+            DomainNames.Add("Toygar");
         }
 
         public void Add<TEntityType>(string _HostName, string _UserName, string _Password , string _Server, string _DBName, int _MaxConnectCount , EDBVendor _DBVendor)
