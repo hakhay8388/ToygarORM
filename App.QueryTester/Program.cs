@@ -24,6 +24,7 @@ namespace App.QueryTester
             //this is domain search layer order 
             //this application name is starting with App (App.QueryTester) so like this 
             // if you have many layer you can add your domain from core to app layer
+            __DataConfiguration.DomainNames.Add("Toygar");
             __DataConfiguration.DomainNames.Add("App");
 
             // this is culture
